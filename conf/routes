@@ -1,0 +1,36 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /h                          controllers.Application.h
+
+#GET     /conn                       controllers.Application.conn
+
+GET     /home                       controllers.Application.home
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# 显示留言列表和发言表单
+#GET     /m                          controllers.Application.m
+
+# 使用POST方式提交留言
+POST    /login                   controllers.Application.login
+
+#GET    /login                   controllers.Application.login
+
+POST    /register                   controllers.Application.register
+
+GET    /info                  controllers.Application.info
+
+POST    /work                   controllers.Application.work
+
+GET    /findUser/:username                 controllers.Application.findUser(username)
+
+#GET    /findUser()          controllers.Application.findUser(username : String)
+GET    /findWork                  controllers.Application.findWork
+
+GET    /editUser                  controllers.Application.editUser
+GET    /deleteWork                 controllers.Application.deleteWork
+

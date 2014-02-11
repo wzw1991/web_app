@@ -1,0 +1,38 @@
+@(msgs: List[Work], msgForm: Form[(String, String, String)])
+
+@* 导入 helper 包下的类和对象，因为需要其中的form来生成表单 *@
+@import helper._
+
+@* 调用main.scala.html模板，并将标题改为"留言板" *@
+@main("Rontech勤务系统信息") {
+
+ <h2>工作信息<h2>
+ <ul>
+        @* 提取 msgs 入参中的全部数据 *@
+        @msgs.map { message =>
+            <li>
+                @* 提取名字 *@
+                <p><strong>@message.username</strong></p>
+                @* 提取开始工作时间 *@
+                <p>@message.workStart</p>
+                @* 提取结束工作时间 *@
+                <p>@message.workEnd</p>
+            </li>
+        }
+ </ul>
+   @* 创建表单，告知表单提交时发送POST给routes.Application.postMsg来处理 *@
+   @form(routes.Application.work){
+       @* username的输入框*@
+       @inputText(msgForm("username").copy(value = Some(msgs(0).username)), '_label -> "用户名" ) @*传回来登记用户的名字 *@ 
+        @* username的输入框*@
+       @inputText(msgForm("workStart"), '_label -> "勤务开始时间")
+        @* username的输入框*@
+       @inputText(msgForm("workEnd"), '_label -> "勤务结束时间") 
+       @* 勤务登记 *@      
+       <input type="submit" value="勤务时间登记" >
+       <a href = "/findUser(@msgs(0).username)"><input type="button" value="个人信息查看" ></a>  @*想把username作为检索条件去检索/findUser---带参数？ *@ 
+       <a href = "/findWork"><input type="button" value="勤务信息查看" ></a>  @*想把username作为检索条件去检索/findWork---带参数？*@ 
+       
+   }
+
+}
